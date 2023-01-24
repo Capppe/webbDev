@@ -1,12 +1,53 @@
-<!--document.getElementById("loginLayer").style.display = "block";-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN” "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="sv">
 
 <html>
     <head>
+        <script>
+            function check()
+            {
+                console.log(document.getElementById('panicPass').value);
+                if(document.getElementById('panicPass').value == ""){
+                    return false;
+                }
+                if(document.getElementById('panicCode').value == ""){
+                    return false;
+                }
+                
+                return true;
+            }
+
+            function showPrompt()
+            {
+                document.getElementById('securityLayer').style.display = "block";
+            }
+
+            function hashing()
+            {
+                document.getElementById('panicPass').value = hex_md5(document.getElementById('panicPass').value);
+            }
+        </script>
+
+        <style>
+            #securityLayer {
+                display: none;
+            }
+        </style>
     </head>
     <body>
-        Delete file "mytest.txt".
-        <form name="myForm" action='http://localhost:3000/api/panicButton' method="get">
-            <input type="submit" class="button" value="Delete File">
-        </form>
+        <input type="button" onclick="showPrompt()" class="button" value="Delete File">
+
+        <div id="securityLayer">
+            <big><strong>Panic Button security check</strong></big>
+            <form name="form" action='http://localhost:3000/api/panicButton' onSubmit="return check()"  method="get">
+                <p />
+                Please enter your password: <input type="text" class="panicPass" name="panicPass" id="panicPass" size="7" maxlength="7" />
+                <p />
+                Please enter the Panic Security Code: <input type="text" name="panicCode" id="panicCode" size="7" maxlength="7" />
+                <p />
+                <input type="submit" class="button" value="Delete database" onClick="javascript:hashing()"/><input class="button" type="reset" value="Reset Form" />
+                <p />
+            </form>
+        </div>
     </body>
 </html>

@@ -54,6 +54,7 @@ const editemployee = require('./routes/editemployee');
 const getchat = require('./routes/getchat');
 const chat = require('./routes/chat');
 const panicButton = require('./routes/panicbutton');
+const archive = require('./routes/archiveObject');
 
 
 /* -------------- Skapa default-router (om ingen under-sökväg anges av användaren) --------------------- */
@@ -83,8 +84,7 @@ app.get('/', function(request, response)
     response.write(htmlHeader);
     response.write(htmlMenu);
     response.write(htmlInfoStart);
-    //htmlInfo = readHTML('./public/text/index.html');
-    htmlInfo = readHTML('./public/text/panicButton.html');
+    htmlInfo = readHTML('./public/text/index.html');
     response.write(htmlInfo);    
     response.write(htmlInfoStop);
     response.write(htmlFooter);
@@ -104,6 +104,7 @@ app.use('/api/editemployee', editemployee);
 app.use('/api/getchat', getchat);
 app.use('/api/chat', chat);
 app.use('/api/panicButton', panicButton);
+app.use('/api/archive', archive);
 
 
 /* ---------------------------------- Starta webbservern ------------------------------ */
